@@ -11,9 +11,17 @@
  * you just need to write your custom data handling stuff.
  */
 
+system('cls');
+
+$annoying_chars = array(".",":");
+define('IP', str_replace($annoying_chars, '_', $_SERVER['REMOTE_ADDR']));
 define('LOGDIR', "logs");
+define('LOGCOMPPATH', LOGDIR."/".IP);
 define('LOGEXT', ".csv");
 define('INFSEP', "|||"); // Must match INFO_SEPARATOR in trackui.js
+
+echo("yo\n");
+echo(LOGCOMPPATH);
 
 // Enable CORS
 header('Access-Control-Allow-Origin: *');
@@ -64,21 +72,25 @@ $info_data = str_replace(INFSEP, PHP_EOL, $info_data) .PHP_EOL;
 // Ensure that our dir exists
 if (!is_dir(LOGDIR) && !mkdir(LOGDIR)) exit;
 
+if (!is_dir(LOGCOMPPATH)) {
+  mkdir(LOGCOMPPATH, 0777, true);
+};
+
 if ($_POST['action'] == "init") {
 
   $fid = (int)date("YmdHis");
   // Avoid duplicated file IDs
-  while (is_file(LOGDIR."/".$fid.LOGEXT)) $fid++;
+  while (is_file(LOGCOMPPATH."/".$fid.LOGEXT)) $fid++;
 
   // Save data for the first time.
   // The column separator must match ARGS_SEPARATOR in trackui.js
   $header = "cursor timestamp xpos ypos event xpath attrs extras" .PHP_EOL;
-  file_put_contents(LOGDIR."/".$fid.LOGEXT, $header.$info_data);
+  file_put_contents(LOGCOMPPATH."/".$fid.LOGEXT, $header.$info_data);
 
   // Save metadata as XML. It could be any other format, actually
   $xml  = '<?xml version="1.0" encoding="UTF-8"?>' .PHP_EOL;
   $xml .= '<data>' .PHP_EOL;
-  $xml .= ' <ip>'.$_SERVER['REMOTE_ADDR'].'</ip>' .PHP_EOL;
+  $xml .= ' <ip>'.IP.'</ip>' .PHP_EOL;
   $xml .= ' <date>'.date("r").'</date>' .PHP_EOL;
   $xml .= ' <url>'.htmlentities($_POST['url']).'</url>' .PHP_EOL;
   $xml .= ' <ua>'.$_SERVER['HTTP_USER_AGENT'].'</ua>' .PHP_EOL;
@@ -87,7 +99,7 @@ if ($_POST['action'] == "init") {
   $xml .= ' <document>'.$_POST['docw'] .'x'. $_POST['doch'].'</document>' .PHP_EOL;
   $xml .= ' <task>'.$_POST['task'].'</task>' .PHP_EOL;
   $xml .= '</data>' .PHP_EOL;
-  file_put_contents(LOGDIR."/".$fid.".xml", $xml);
+  file_put_contents(LOGCOMPPATH."/".$fid.".xml", $xml);
 
   // Notify recording script
   echo $fid;
@@ -96,7 +108,7 @@ if ($_POST['action'] == "init") {
 
   // Don't write blank lines
   if (trim($info_data)) {
-    file_put_contents(LOGDIR."/".$_POST['uid'].LOGEXT, $info_data, FILE_APPEND);
+    file_put_contents(LOGCOMPPATH."/".$_POST['uid'].LOGEXT, $info_data, FILE_APPEND);
   }
 
 }
