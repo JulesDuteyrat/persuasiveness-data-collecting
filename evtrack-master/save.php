@@ -13,15 +13,12 @@
 
 system('cls');
 
-$annoying_chars = array(".",":");
-define('IP', str_replace($annoying_chars, '_', $_SERVER['REMOTE_ADDR']));
+$ip = str_replace('.', '_', $_SERVER['REMOTE_ADDR']);
+define('IP', str_replace(':', '-', $ip));
 define('LOGDIR', "logs");
 define('LOGCOMPPATH', LOGDIR."/".IP);
 define('LOGEXT', ".csv");
 define('INFSEP', "|||"); // Must match INFO_SEPARATOR in trackui.js
-
-echo("yo\n");
-echo(LOGCOMPPATH);
 
 // Enable CORS
 header('Access-Control-Allow-Origin: *');
@@ -51,6 +48,7 @@ if (strpos($headers['Content-Type'], 'text/') !== FALSE) {
     }
   }
 }
+
 
 // NB: This function is deprecated and always returns FALSE as of PHP 5.4.0
 if (get_magic_quotes_gpc()) {

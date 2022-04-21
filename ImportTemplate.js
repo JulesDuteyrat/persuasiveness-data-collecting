@@ -1,5 +1,5 @@
 const fs = require('fs');
-const dir = './ressoureces/templates';
+const dir = './ressources/templates';
 rdm = new Random();
 fs.readdir(dir, (err, files) => {
 select = rdm.nextInt(0,(files.length-1));
