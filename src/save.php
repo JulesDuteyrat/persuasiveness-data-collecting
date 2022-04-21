@@ -20,8 +20,6 @@ define('LOGCOMPPATH', LOGDIR."/".IP);
 define('LOGEXT', ".csv");
 define('INFSEP', "|||"); // Must match INFO_SEPARATOR in trackui.js
 
-echo("yo\n");
-echo(LOGCOMPPATH);
 
 // Enable CORS
 header('Access-Control-Allow-Origin: *');
