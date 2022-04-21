@@ -11,8 +11,6 @@
  * you just need to write your custom data handling stuff.
  */
 
-system('cls');
-
 $annoying_chars = array(".",":");
 define('IP', str_replace($annoying_chars, '_', $_SERVER['REMOTE_ADDR']));
 define('LOGDIR', "logs");
