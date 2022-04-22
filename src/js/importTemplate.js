@@ -1,4 +1,4 @@
-const dir = '../ressources/templates';
+/*const dir = '../ressources/templates';
 requirejs(["fs"],function(fs){
 window.onload = function(){
     fetch(dir+"/example.txt").then(response => response.text()).then(data => {
@@ -15,4 +15,15 @@ window.onload = function(){
         }
     });
 }
-});
+});*/
+async function fetchHtmlAsText(url) {
+    return await (await fetch(url)).text();
+}
+
+// this is your `load_home() function`
+async function loadHome() {
+    const contentDiv = document.getElementById("content");
+    contentDiv.innerHTML = await fetchHtmlAsText("../ressources/templates");
+}
+
+loadHome();
