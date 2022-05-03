@@ -5,23 +5,25 @@
 </template>
 
 <script>
+//https://vitejs.dev/guide/assets.html - for assets import with vite
+import text from '/src/assets/articles.txt?raw';
+
 export default {
     data() {
         return {
-            elements: [
-                'text 1 : yep thats text 1 for sure',
-                'text 2 : very serious text 2'
-            ],
+            elements: [],
             selectedElement: ''
         }
     },
     created() {
-        const idx = Math.floor(Math.random() * this.elements.length);
-        this.selectedElement = this.elements[idx];
+        const articles = text.split('\r\n\r\n'); //split when there is a new line
+        this.elements = articles;
     },
     mounted() {
+        const idx = Math.floor(Math.random() * this.elements.length);
+        this.selectedElement = this.elements[idx];
+        console.log(this.elements);
         this.emitter.on('skip', () => {
-            console.log('skip');
             if (this.idx < this.elements.length - 1) {
                 this.idx++;
             } else {
