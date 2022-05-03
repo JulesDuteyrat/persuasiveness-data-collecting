@@ -3,6 +3,4 @@ node_modules
 evtrack-master/logs
 src/logs/
 python_data-mining_etc/the-attentive-cursor-dataset/
-package-lock.json
-.gitignore
 
