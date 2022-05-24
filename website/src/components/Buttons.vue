@@ -19,7 +19,8 @@
         },
         methods: {
             goodbye() {
-                alert('Goodbye!');
+                // alert('Goodbye!');
+                this.$emit('logout');
             },
             skip() {
                 this.timerCount=10

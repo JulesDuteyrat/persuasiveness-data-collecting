@@ -17,6 +17,9 @@ export default {
     methods: {
         login() {
             this.logged = true;
+        },
+        logout() {
+          this.logged = false;
         }
     }
 }
@@ -29,7 +32,7 @@ export default {
     <Login v-if="!logged" @login="login" />
     <div v-else>
       <Content/>
-      <ButtonsVue />
+      <ButtonsVue @logout="logout"/>
     </div>
   </div>
 </template>

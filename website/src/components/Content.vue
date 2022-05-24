@@ -22,7 +22,6 @@ export default {
     mounted() {
         const idx = Math.floor(Math.random() * this.elements.length);
         this.selectedElement = this.elements[idx];
-        console.log(this.elements);
         this.emitter.on('skip', () => {
             if (this.idx < this.elements.length - 1) {
                 this.idx++;
