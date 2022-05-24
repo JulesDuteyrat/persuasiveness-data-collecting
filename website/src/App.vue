@@ -5,13 +5,15 @@ import HelloWorld from './components/HelloWorld.vue';
 import ButtonsVue from './components/Buttons.vue';
 import Content from './components/Content.vue';
 import Login from './components/Login.vue';
+import Results from './components/Results.vue';
 </script>
 
 <script>
 export default {
     data() {
         return {
-            logged: false 
+          finished : false,
+          logged: false
         }
     },
     methods: {
@@ -20,6 +22,9 @@ export default {
         },
         logout() {
           this.logged = false;
+        },
+        finish() {
+          this.finished = true;
         }
     }
 }
@@ -30,9 +35,12 @@ export default {
   <div class="text-center mt-60 mx-auto">
     <!-- <HelloWorld msg="Hello Vue 3 + Vite" /> -->
     <Login v-if="!logged" @login="login" />
-    <div v-else>
-      <Content/>
+    <div v-else-if="!finished">
+      <Content @finished="finish"/>
       <ButtonsVue @logout="logout"/>
+    </div>
+    <div v-else>
+      <Results/>
     </div>
   </div>
 </template>

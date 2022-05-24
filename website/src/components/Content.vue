@@ -21,14 +21,21 @@ export default {
     },
     mounted() {
         const idx = Math.floor(Math.random() * this.elements.length);
+        const backup_idx = idx;
         this.selectedElement = this.elements[idx];
         this.emitter.on('skip', () => {
-            if (this.idx < this.elements.length - 1) {
-                this.idx++;
+            if (this.idx == this.backup_idx) {
+                this.emitter.emit('finished');
             } else {
-                this.idx = 0;
+                if (this.idx < this.elements.length - 1) {
+                    this.idx++;
+                } 
+                else {
+                    this.idx = 0;
+                }
+                this.selectedElement = this.elements[this.idx];
             }
-            this.selectedElement = this.elements[this.idx];
+
         });
     }
 }
