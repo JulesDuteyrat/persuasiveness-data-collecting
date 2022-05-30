@@ -26,7 +26,6 @@
     var _time = 0;
     // Registered information is: cursorId, timestamp, xpos, ypos, event, xpath, attrs
     var _info = [];
-    var _infoArrays = [];
 
     /**
      * A small lib to track the user activity by listening to browser events.
@@ -389,7 +388,7 @@
         log: function(args) {
             if (TrackUI.settings.debug && typeof console.log === 'function') {
                 // console.log.apply(console, arguments);
-                console.log.apply(console, _infoArrays);
+                // console.log.apply(console, _infoArrays);
             }
         },
 

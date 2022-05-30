@@ -11,6 +11,7 @@ export default {
     methods: {
         login() {
             this.$emit('login');
+            console.log(this.infoArrays);
         }
     }
 }
