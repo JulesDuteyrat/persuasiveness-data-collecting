@@ -19,7 +19,7 @@ export default {
         const articles = text.split('\r\n\r\n'); //split when there is a new line
         this.elements = articles;
     },
-    emits: ['finished'],
+    emits: ['finish'],
     mounted() {
         var idx = Math.floor(Math.random() * this.elements.length);
         const backup_idx = idx;
@@ -34,8 +34,7 @@ export default {
             }
             console.log(idx);
             if (idx == backup_idx) {
-                console.log('finished');
-                this.emitter.emit('finished');
+                this.$emit('finish');
             } else {
                 this.selectedElement = this.elements[idx];
 

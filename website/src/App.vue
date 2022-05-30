@@ -24,6 +24,7 @@ export default {
           this.logged = false;
         },
         finish() {
+          console.log('finished');
           this.finished = true;
         }
     }
@@ -36,7 +37,7 @@ export default {
     <!-- <HelloWorld msg="Hello Vue 3 + Vite" /> -->
     <Login v-if="!logged" @login="login" />
     <div v-else-if="!finished">
-      <Content @finished="finish"/>
+      <Content @finish="finish"/>
       <ButtonsVue @logout="logout"/>
     </div>
     <div v-else>

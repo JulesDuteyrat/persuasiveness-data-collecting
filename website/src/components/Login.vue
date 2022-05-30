@@ -5,6 +5,7 @@
 </template>
 
 <script>
+// le role de ce composant est de faire le boutton de login initial
 export default {
     emits: ['login'],
     methods: {
