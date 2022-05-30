@@ -19,21 +19,26 @@ export default {
         const articles = text.split('\r\n\r\n'); //split when there is a new line
         this.elements = articles;
     },
+    emits: ['finished'],
     mounted() {
-        const idx = Math.floor(Math.random() * this.elements.length);
+        var idx = Math.floor(Math.random() * this.elements.length);
         const backup_idx = idx;
+        console.log(idx);
         this.selectedElement = this.elements[idx];
         this.emitter.on('skip', () => {
-            if (this.idx == this.backup_idx) {
+            if (idx < this.elements.length - 1) {
+                idx++;
+            } 
+            else {
+                idx = 0;
+            }
+            console.log(idx);
+            if (idx == backup_idx) {
+                console.log('finished');
                 this.emitter.emit('finished');
             } else {
-                if (this.idx < this.elements.length - 1) {
-                    this.idx++;
-                } 
-                else {
-                    this.idx = 0;
-                }
-                this.selectedElement = this.elements[this.idx];
+                this.selectedElement = this.elements[idx];
+
             }
 
         });
