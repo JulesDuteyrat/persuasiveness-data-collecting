@@ -1,8 +1,9 @@
 <script>
+    const time = 5;
     export default {
         data() {
             return {
-                timerCount: 10
+                timerCount: time
             }
         },
         watch: {
@@ -23,7 +24,7 @@
                 this.$emit('logout');
             },
             skip() {
-                this.timerCount=10
+                this.timerCount=time
                 this.emitter.emit('skip');
             }
         }
