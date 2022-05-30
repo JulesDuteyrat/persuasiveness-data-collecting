@@ -6,6 +6,7 @@
 
 <script>
 export default {
+    emits: ['login'],
     methods: {
         login() {
             this.$emit('login');
