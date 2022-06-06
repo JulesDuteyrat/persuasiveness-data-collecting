@@ -15,6 +15,10 @@ export default {
             for (const num of simpleInfoArr) {
             counts[num] = counts[num] ? counts[num] + 1 : 1;
             }
+            console.log(counts);
+            // remove the element "error" from the object
+            delete counts.error;
+            
             return counts;
         }
     }

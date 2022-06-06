@@ -387,7 +387,7 @@
          */
         log: function(args) {
             if (TrackUI.settings.debug && typeof console.log === 'function') {
-                // console.log.apply(console, arguments);
+                console.log.apply(console, arguments);
                 // console.log.apply(console, _infoArrays);
             }
         },
