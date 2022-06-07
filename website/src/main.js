@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import mitt from 'mitt'
-import * as tf from '@tensorflow/tfjs'
 import './index.css'
 
 const emitter = mitt();

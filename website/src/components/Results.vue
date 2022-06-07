@@ -1,4 +1,8 @@
 <script>
+// import { model } from '@tensorflow/tfjs';
+import * as tf from '@tensorflow/tfjs';
+import modelPath from '/src/assets/model/model.json';
+
 export default {
     mounted() {
         
@@ -15,7 +19,6 @@ export default {
             for (const num of simpleInfoArr) {
             counts[num] = counts[num] ? counts[num] + 1 : 1;
             }
-            console.log(counts);
             // remove the elements from the object
             const todelete = ['mouseup', 'focus', 'load', 'beforeunload', 'unload', 'touchend', 'error'];
             for (let i = 0; i < todelete.length; i++) {
@@ -33,6 +36,21 @@ export default {
                 }
             }
             return output;
+        },
+        async loadModel() {
+            const model = await tf.loadLayersModel(modelPath);
+            return model;
+        },
+        tensorflow(){
+            let inputArr = this.infoArrayToCount();
+            let input = tf.tensor2d([inputArr]);
+            // let model = this.loadModel();
+            this.loadModel().then(model => {
+                const prediction = model.predict(input);
+                console.log(prediction.dataSync());
+                return prediction.dataSync();
+            });
+
         }
     }
 }
@@ -40,7 +58,7 @@ export default {
 
 <template>
     <h2>Results</h2>
-    {{ infoArrayToCount() }}
+    {{ tensorflow() }}
 </template>
 
 <style scoped>
