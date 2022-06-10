@@ -1,4 +1,6 @@
 <template>
+    This website records your activity through the browser to give an aproximative score of your attention.
+    <br><br>
     Press the button to start the survey.
     <br>
     <button @click="login">Continue</button>
