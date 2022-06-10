@@ -6,7 +6,7 @@ import * as tf from '@tensorflow/tfjs';
 export default {
     data() {
         return {
-            loading: false,
+            loading: true,
             prediction: null
         }
     },
@@ -70,10 +70,25 @@ export default {
         loading...
     </div>
     <div v-else>
-        {{ prediction }}
+        <h3>Estimated attention : </h3><br/>
+        1/5 : {{ prediction[1]*100 }}% <br/>
+        2/5 : {{ prediction[2]*100 }}% <br/>
+        3/5 : {{ prediction[3]*100 }}% <br/>
+        4/5 : {{ prediction[4]*100 }}% <br/>
+        5/5 : {{ prediction[5]*100 }}%
     </div>
 </template>
 
 
 <style scoped>
+  h2 {
+    @apply text-center;
+    @apply font-bold;
+    @apply mb-4;
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-center;
+    @apply font-bold;
+  }
 </style>
