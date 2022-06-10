@@ -1,5 +1,5 @@
 <script>
-    const time = 5;
+    const time = 2;
     export default {
         data() {
             return {

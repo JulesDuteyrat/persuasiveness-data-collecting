@@ -1,11 +1,14 @@
 <script>
 // import { model } from '@tensorflow/tfjs';
 import * as tf from '@tensorflow/tfjs';
-import modelPath from '/src/assets/model/model.json';
+// import modelPath from '/src/assets/model/model.json';
 
 export default {
-    mounted() {
-        
+    data() {
+        return {
+            loading: false,
+            prediction: null
+        }
     },
     methods: {
         infoArrayToCount(){
@@ -38,28 +41,39 @@ export default {
             return output;
         },
         async loadModel() {
-            const model = await tf.loadLayersModel(modelPath);
+            const model = await tf.loadLayersModel('/src/assets/model/model.json');
             return model;
         },
         tensorflow(){
+            this.loading = true;
             let inputArr = this.infoArrayToCount();
             let input = tf.tensor2d([inputArr]);
             // let model = this.loadModel();
             this.loadModel().then(model => {
                 const prediction = model.predict(input);
                 console.log(prediction.dataSync());
-                return prediction.dataSync();
+                this.prediction = prediction.dataSync();
+                this.loading = false;
             });
 
         }
+    },
+    mounted() {
+        this.tensorflow();
     }
 }
 </script>
 
 <template>
     <h2>Results</h2>
-    {{ tensorflow() }}
+    <div v-if="loading">
+        loading...
+    </div>
+    <div v-else>
+        {{ prediction }}
+    </div>
 </template>
+
 
 <style scoped>
 </style>
