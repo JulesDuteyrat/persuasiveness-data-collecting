@@ -71,11 +71,7 @@ export default {
     </div>
     <div v-else>
         <h3>Estimated attention : </h3><br/>
-        1/5 : {{ prediction[1]*100 }}% <br/>
-        2/5 : {{ prediction[2]*100 }}% <br/>
-        3/5 : {{ prediction[3]*100 }}% <br/>
-        4/5 : {{ prediction[4]*100 }}% <br/>
-        5/5 : {{ prediction[5]*100 }}%
+         {{ 1 * prediction[1] + 2 * prediction[2] + 3 * prediction[3] + 4 * prediction[4] + 5 * prediction[5]}}/5 <br/>
     </div>
 </template>
 
