@@ -11,6 +11,9 @@ export default {
         }
     },
     methods: {
+        /**
+         * Convert the evtrack array to a tensor.
+         */
         infoArrayToCount(){
             let simpleInfoArr = [];
             for (let i = 0; i < this.infoArrays.length; i++) {
@@ -44,6 +47,9 @@ export default {
             const model = await tf.loadLayersModel('/src/assets/model/model.json');
             return model;
         },
+        /**
+         * Predict the attention score based on the evtrack input.
+         */
         tensorflow(){
             this.loading = true;
             let inputArr = this.infoArrayToCount();
