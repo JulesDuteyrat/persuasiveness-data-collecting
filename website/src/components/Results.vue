@@ -12,7 +12,7 @@ export default {
     },
     methods: {
         /**
-         * Convert the evtrack array to a tensor.
+         * Convert the evtrack array to a format close to a tensor.
          */
         infoArrayToCount(){
             let simpleInfoArr = [];
