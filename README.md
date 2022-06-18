@@ -22,6 +22,12 @@ To do so :
     - This should install everything you need to run this project (Vue 3, Vite, tensorflow.js, tailwindCSS…)
 - Do `npm run dev` to run a local dev server of the project with vite.
 
+### Workflow of the website
+
+The website is based on a series of vue.js components. You can see how they are implemented in the `App.vue` file.
+
+The content of the pages is generated in `Content.vue` with some text loaded from `/src/assets/articles.txt` and are browsed with the buttons of `Buttons.vue`.The implementation of the tensorflow.js model is entirely contained in the `Results.vue` component. 
+
 ### Credit
 
 This project was made by @Eliaz-LR and @JulesDuteyrat .
